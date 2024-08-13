@@ -1,6 +1,6 @@
 import { Platypi } from "next/font/google";
 
-const platypi = Platypi({
+export const platypi = Platypi({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
 });

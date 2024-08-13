@@ -67,3 +67,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+.cl-userButtonBox {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.cl-internal-u72jx4:focus {
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+  transition-property: none;
+  transition-timing-function: none;
+  transition-duration: none;
+}

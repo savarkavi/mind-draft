@@ -18,7 +18,7 @@ const HomeLayout = ({
   children: React.ReactNode;
 }>) => {
   const [isCollapsed, setIsCollapased] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 1400px)");
 
   const onChevronClick = () => {
     setIsCollapased(true);
@@ -36,22 +36,23 @@ const HomeLayout = ({
     }
   }, [isMobile]);
 
-  console.log("isMobile:" + isMobile);
-  console.log("isCollapsed:" + isCollapsed);
-
   return (
     <div className="flex">
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel
+          defaultSize={15}
+          minSize={15}
+          maxSize={isCollapsed ? 0 : 50}
           className={cn(
             "transition-all",
-            !isCollapsed ? "min-w-[288px] max-w-[800px]" : "w-0 min-w-0"
+            isMobile && "min-w-[288px] max-w-[800px]",
+            isCollapsed ? "w-0 min-w-0" : "min-w-[288px] max-w-[800px]"
           )}
         >
           <Sidebar onChevronClick={onChevronClick} />
         </ResizablePanel>
         <ResizableHandle />
-        <ResizablePanel defaultSize={850} className="p-4">
+        <ResizablePanel className="p-4" defaultSize={85}>
           <div className="h-8">
             {isCollapsed && (
               <Menu className="cursor-pointer" onClick={onMenuClick} />
