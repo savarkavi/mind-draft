@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "./providers";
 import Header from "./(marketing)/_components/Header";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-[#F3EBDB]`}>
         <Providers>
           <NextTopLoader color="#4dc88a" />
+          <Toaster />
           {children}
         </Providers>
       </body>

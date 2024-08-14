@@ -10,7 +10,7 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { cn } from "@/lib/utils";
-import { Menu, MenuIcon } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const HomeLayout = ({
   children,
@@ -37,7 +37,7 @@ const HomeLayout = ({
   }, [isMobile]);
 
   return (
-    <div className="flex">
+    <div>
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel
           defaultSize={15}
