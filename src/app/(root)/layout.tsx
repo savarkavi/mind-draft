@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/resizable";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
+import HomeHeader from "./home/_components/HomeHeader";
 
 const HomeLayout = ({
   children,
@@ -44,7 +45,7 @@ const HomeLayout = ({
           minSize={15}
           maxSize={isCollapsed ? 0 : 50}
           className={cn(
-            "transition-all",
+            "transition-all relative",
             isMobile && "min-w-[288px] max-w-[800px]",
             isCollapsed ? "w-0 min-w-0" : "min-w-[288px] max-w-[800px]"
           )}
@@ -53,7 +54,7 @@ const HomeLayout = ({
         </ResizablePanel>
         <ResizableHandle />
         <ResizablePanel className="p-4" defaultSize={85}>
-          <div className="h-8">
+          <div className="flex">
             {isCollapsed && (
               <Menu className="cursor-pointer" onClick={onMenuClick} />
             )}
