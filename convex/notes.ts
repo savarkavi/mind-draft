@@ -132,3 +132,26 @@ export const restoreNote = mutation({
     return restoredNote;
   },
 });
+
+export const getNote = query({
+  args: { id: v.id("notes") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("User not authenticated");
+    }
+
+    const existingNote = await ctx.db.get(args.id);
+
+    if (!existingNote) {
+      throw new Error("Note not found");
+    }
+
+    if (existingNote.userId !== identity.subject) {
+      throw new Error("Unauthorized");
+    }
+
+    return existingNote;
+  },
+});

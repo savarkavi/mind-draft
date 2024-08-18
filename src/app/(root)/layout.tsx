@@ -12,6 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import HomeHeader from "./home/_components/HomeHeader";
+import { usePathname } from "next/navigation";
 
 const HomeLayout = ({
   children,
@@ -20,6 +21,7 @@ const HomeLayout = ({
 }>) => {
   const [isCollapsed, setIsCollapased] = useState(false);
   const isMobile = useMediaQuery("(max-width: 1400px)");
+  const pathname = usePathname();
 
   const onChevronClick = () => {
     setIsCollapased(true);
@@ -54,10 +56,11 @@ const HomeLayout = ({
         </ResizablePanel>
         <ResizableHandle />
         <ResizablePanel className="p-4" defaultSize={85}>
-          <div className="flex">
+          <div className="flex gap-12">
             {isCollapsed && (
               <Menu className="cursor-pointer" onClick={onMenuClick} />
             )}
+            {pathname.includes("/notes") && <HomeHeader />}
           </div>
           {children}
         </ResizablePanel>
