@@ -3,33 +3,11 @@ import { ArchiveRestore, Loader2, Search, Trash } from "lucide-react";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { toast } from "sonner";
-
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import DeleteDialog from "@/components/DeleteDialog";
 
 const TrashContent = () => {
   const archivedNotes = useQuery(api.notes.getArchivedNotes);
-  const deleteNote = useMutation(api.notes.deleteNote);
   const restoreNote = useMutation(api.notes.restoreNote);
-
-  const onDeleteNote = (id: Id<"notes">) => {
-    const promise = deleteNote({ id });
-
-    toast.promise(promise, {
-      loading: "Deleting note...",
-      success: "Note deleted",
-      error: "Failed to delete the note",
-    });
-  };
 
   const onRestoreNote = (id: Id<"notes">) => {
     const promise = restoreNote({ id });
@@ -68,34 +46,10 @@ const TrashContent = () => {
                 <h2>{note.title}</h2>
                 <div className="flex gap-4 items-center">
                   <ArchiveRestore
-                    className="w-5 h-5 text-green-500"
+                    className="w-5 h-5 text-green-500 shrink-0"
                     onClick={() => onRestoreNote(note._id)}
                   />
-                  <AlertDialog>
-                    <AlertDialogTrigger>
-                      <Trash className="w-5 h-5 text-red-400" />
-                    </AlertDialogTrigger>
-                    <AlertDialogContent className="z-[9999]">
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>
-                          Do you want to delete this note?
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                          This will permanently delete your note and cannot be
-                          restored.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction
-                          onClick={() => onDeleteNote(note._id)}
-                          className="bg-red-500"
-                        >
-                          Delete
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
+                  <DeleteDialog note={note} />
                 </div>
               </div>
             );

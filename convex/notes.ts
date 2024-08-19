@@ -155,3 +155,53 @@ export const getNote = query({
     return existingNote;
   },
 });
+
+export const changeNoteTitle = mutation({
+  args: { title: v.string(), id: v.id("notes") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("User not authenticated");
+    }
+
+    const existingNote = await ctx.db.get(args.id);
+
+    if (!existingNote) {
+      throw new Error("Note not found");
+    }
+
+    if (existingNote.userId !== identity.subject) {
+      throw new Error("Unauthorized");
+    }
+
+    const updatedNote = await ctx.db.patch(args.id, { title: args.title });
+
+    return updatedNote;
+  },
+});
+
+export const changeNoteContent = mutation({
+  args: { id: v.id("notes"), content: v.string() },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("User not authenticated");
+    }
+
+    const existingNote = await ctx.db.get(args.id);
+
+    if (!existingNote) {
+      throw new Error("Note not found");
+    }
+
+    if (existingNote.userId !== identity.subject) {
+      throw new Error("Unauthorized");
+    }
+
+    const updatedNote = await ctx.db.patch(args.id, { content: args.content });
+
+    return updatedNote;
+  },
+});

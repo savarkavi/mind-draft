@@ -36,7 +36,8 @@ const Item = ({
   return (
     <div
       className={cn(
-        "group flex justify-between items-center text-gray-600 cursor-pointer hover:bg-gray-500/10 p-4",
+        "group flex justify-between items-center text-gray-600 cursor-pointer hover:bg-gray-500/10 p-4 mt-2",
+        isNote && "p-2",
         className
       )}
       onClick={() => (isNote ? onClick(noteId) : onClick())}

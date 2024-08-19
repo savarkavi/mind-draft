@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { Id } from "../../../../../convex/_generated/dataModel";
 import { Loader } from "lucide-react";
 import Title from "./Title";
+import Editor from "./Editor";
 
 const Toolbar = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ const Toolbar = () => {
   return (
     <div className="mt-32">
       <Title note={note} />
+      <Editor note={note} />
     </div>
   );
 };

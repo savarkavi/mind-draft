@@ -13,18 +13,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import DeleteDialog from "@/components/DeleteDialog";
 
 const HomeHeaderItems = () => {
   const { id } = useParams();
   const note = useQuery(api.notes.getNote, { id: id as Id<"notes"> });
 
-  let formattedDate;
+  if (!note) return;
 
-  if (note) {
-    const createdAt = new Date(note?._creationTime);
-
-    formattedDate = createdAt.toLocaleDateString("en-US");
-  }
+  const createdAt = new Date(note?._creationTime);
+  let formattedDate = createdAt.toLocaleDateString("en-US");
 
   return (
     <div className="flex justify-between w-full">
@@ -34,11 +32,12 @@ const HomeHeaderItems = () => {
           <Ellipsis />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem>
-            <div className="flex items-center gap-2">
+          <DropdownMenuItem asChild>
+            <DeleteDialog note={note} />
+            {/* <div className="flex items-center gap-2">
               <Trash className="w-5 h-5" />
               <span>Delete</span>
-            </div>
+            </div> */}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>

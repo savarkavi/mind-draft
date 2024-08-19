@@ -94,3 +94,24 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
+
+.bn-container[data-color-scheme] {
+  --bn-colors-editor-text: #222222;
+  --bn-colors-editor-background: #f3ebdb;
+  --bn-colors-menu-text: #222222;
+  --bn-colors-menu-background: #efe4cf;
+  --bn-colors-tooltip-text: #222222;
+  --bn-colors-tooltip-background: #efe4cf;
+  --bn-colors-hovered-text: #222222;
+  --bn-colors-hovered-background: #efe4cf;
+  --bn-colors-selected-text: #222222;
+  --bn-colors-selected-background: #efe4cf;
+  --bn-colors-disabled-text: #efe4cf;
+  --bn-colors-disabled-background: #efe4cf;
+  --bn-colors-shadow: #efe4cf;
+  --bn-colors-border: #efe4cf;
+  --bn-colors-side-menu: #bababa;
+  --bn-color-highlight-colors: #f3ebdb;
+  --bn-border-radius: 4px;
+  --bn-font-family: Helvetica Neue, sans-serif;
+}

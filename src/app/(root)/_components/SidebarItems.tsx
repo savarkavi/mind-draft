@@ -85,7 +85,7 @@ const SidebarItems = () => {
         {notes?.map((note) => (
           <Item
             key={note._id}
-            label="Untitled"
+            label={note.title ? note.title : "Untitled"}
             icon={File}
             isNote
             onClick={onNoteClick}

@@ -20,7 +20,8 @@ const HomeLayout = ({
   children: React.ReactNode;
 }>) => {
   const [isCollapsed, setIsCollapased] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 1400px)");
+  const isTablet = useMediaQuery("(max-width: 1400px)");
+  const isMobile = useMediaQuery("(max-width: 640px)");
   const pathname = usePathname();
 
   const onChevronClick = () => {
@@ -32,30 +33,33 @@ const HomeLayout = ({
   };
 
   useEffect(() => {
-    if (isMobile) {
+    if (isTablet) {
       setIsCollapased(true);
     } else {
       setIsCollapased(false);
     }
-  }, [isMobile]);
+  }, [isTablet]);
 
   return (
     <div>
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel
           defaultSize={15}
-          minSize={15}
-          maxSize={isCollapsed ? 0 : 50}
+          minSize={isMobile ? 100 : 15}
+          maxSize={isCollapsed ? 0 : isMobile ? 100 : 50}
           className={cn(
             "transition-all relative",
-            isMobile && "min-w-[288px] max-w-[800px]",
-            isCollapsed ? "w-0 min-w-0" : "min-w-[288px] max-w-[800px]"
+            isTablet && "min-w-[288px] max-w-full",
+            isCollapsed ? "w-0 min-w-0" : "min-w-[288px] max-w-full"
           )}
         >
           <Sidebar onChevronClick={onChevronClick} />
         </ResizablePanel>
         <ResizableHandle />
-        <ResizablePanel className="p-4" defaultSize={85}>
+        <ResizablePanel
+          className={isMobile && !isCollapsed ? "p-0" : "p-4"}
+          defaultSize={85}
+        >
           <div className="flex gap-12">
             {isCollapsed && (
               <Menu className="cursor-pointer" onClick={onMenuClick} />

@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-[#F3EBDB]`}>
         <Providers>
           <NextTopLoader color="#4dc88a" />
-          <Toaster />
+          <Toaster position="top-center" />
           {children}
         </Providers>
       </body>
