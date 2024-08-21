@@ -4,10 +4,13 @@ import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { toast } from "sonner";
 import DeleteDialog from "@/components/DeleteDialog";
+import { useRouter } from "next/navigation";
 
 const TrashContent = () => {
   const archivedNotes = useQuery(api.notes.getArchivedNotes);
   const restoreNote = useMutation(api.notes.restoreNote);
+
+  const router = useRouter();
 
   const onRestoreNote = (id: Id<"notes">) => {
     const promise = restoreNote({ id });
@@ -17,6 +20,10 @@ const TrashContent = () => {
       success: "Note Restored",
       error: "Failed to restore the note",
     });
+  };
+
+  const onNoteClick = (id: string) => {
+    router.push(`/home/notes/${id}`);
   };
 
   return (
@@ -42,6 +49,7 @@ const TrashContent = () => {
               <div
                 key={note._id}
                 className="p-2 flex justify-between hover:bg-gray-500/10 cursor-pointer"
+                onClick={() => onNoteClick(note._id)}
               >
                 <h2>{note.title}</h2>
                 <div className="flex gap-4 items-center">

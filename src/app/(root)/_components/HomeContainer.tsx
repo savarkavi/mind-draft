@@ -26,7 +26,7 @@ const HomeContainer = () => {
 
   if (!user)
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center h-screen">
         <Loader className="animate-spin w-8 h-8" />
       </div>
     );
@@ -42,7 +42,7 @@ const HomeContainer = () => {
         />
       </div>
       <h1
-        className={`text-[#4dc88a] font-bold text-2xl ${platypi.className}`}
+        className={`text-[#4dc88a] font-bold text-2xl text-center ${platypi.className}`}
       >{`Welcome to MindDraft, ${user.username?.toUpperCase()}`}</h1>
       <Button className="bg-[#4dc88a] mt-8" onClick={onCreateNote}>
         Create Note

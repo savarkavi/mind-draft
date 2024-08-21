@@ -9,7 +9,9 @@ import { PartialBlock } from "@blocknote/core";
 
 const Editor = ({ note }: { note: Doc<"notes"> }) => {
   const editor = useCreateBlockNote({
-    initialContent: JSON.parse(note.content!) as PartialBlock[],
+    initialContent: note.content
+      ? (JSON.parse(note.content) as PartialBlock[])
+      : undefined,
   });
   const changeNoteContent = useMutation(api.notes.changeNoteContent);
 

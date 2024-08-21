@@ -50,17 +50,16 @@ const HomeLayout = ({
           className={cn(
             "transition-all relative",
             isTablet && "min-w-[288px] max-w-full",
-            isCollapsed ? "w-0 min-w-0" : "min-w-[288px] max-w-full"
+            isCollapsed || (isCollapsed && isTablet)
+              ? "w-0 min-w-0"
+              : "min-w-[288px] max-w-full"
           )}
         >
-          <Sidebar onChevronClick={onChevronClick} />
+          <Sidebar onChevronClick={onChevronClick} isTablet={isTablet} />
         </ResizablePanel>
         <ResizableHandle />
-        <ResizablePanel
-          className={isMobile && !isCollapsed ? "p-0" : "p-4"}
-          defaultSize={85}
-        >
-          <div className="flex gap-12">
+        <ResizablePanel defaultSize={85}>
+          <div className="flex gap-12 p-4">
             {isCollapsed && (
               <Menu className="cursor-pointer" onClick={onMenuClick} />
             )}

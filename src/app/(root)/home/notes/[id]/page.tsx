@@ -7,7 +7,7 @@ import Toolbar from "../../_components/Toolbar";
 const NotePage = () => {
   const { user } = useUser();
 
-  if (!user) return;
+  if (!user) return null;
 
   return (
     <div className="max-w-[800px] mx-auto h-full">

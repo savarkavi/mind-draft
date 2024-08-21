@@ -67,6 +67,10 @@ const SidebarItems = () => {
     router.push(`/home/notes/${id}`);
   };
 
+  const onDocumentsClick = () => {
+    router.push("/home/documents");
+  };
+
   return (
     <div className="h-full relative">
       <SearchDialog open={searchOpen} setOpen={setSearchOpen} notes={notes} />
@@ -93,7 +97,7 @@ const SidebarItems = () => {
             noteId={note._id}
           />
         ))}
-        <Item label="Documents" icon={ScrollText} onClick={() => {}} />
+        <Item label="Documents" icon={ScrollText} onClick={onDocumentsClick} />
         <Popover>
           <PopoverTrigger className="w-full">
             <Item label="Trash" icon={Trash} onClick={() => {}} />

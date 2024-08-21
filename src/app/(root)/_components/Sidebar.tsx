@@ -4,9 +4,14 @@ import { ChevronsLeftIcon } from "lucide-react";
 import SidebarItems from "./SidebarItems";
 import { useMediaQuery } from "usehooks-ts";
 
-const Sidebar = ({ onChevronClick }: { onChevronClick: () => void }) => {
+const Sidebar = ({
+  onChevronClick,
+  isTablet,
+}: {
+  onChevronClick: () => void;
+  isTablet: boolean;
+}) => {
   const { user } = useUser();
-  const isMobile = useMediaQuery("(max-width: 1024px)");
 
   if (!user) {
     return <div className="bg-[#EFE4CF] h-screen shadow-md w-full"></div>;

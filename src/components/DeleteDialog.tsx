@@ -14,24 +14,35 @@ import { toast } from "sonner";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Trash } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-const DeleteDialog = ({ note }: { note: Doc<"notes"> }) => {
+const DeleteDialog = ({
+  note,
+  isPage,
+}: {
+  note: Doc<"notes">;
+  isPage?: boolean;
+}) => {
   const deleteNote = useMutation(api.notes.deleteNote);
+  const router = useRouter();
 
-  const onDeleteNote = (id: Id<"notes">) => {
+  const onDeleteNote = async (id: Id<"notes">) => {
     const promise = deleteNote({ id });
 
     toast.promise(promise, {
       loading: "Deleting note...",
-      success: "Note deleted",
+      success: "Not deleted",
       error: "Failed to delete the note",
     });
+
+    router.push("/home");
   };
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="w-full">
+      <AlertDialogTrigger className="w-full flex items-center gap-2">
         <Trash className="w-5 h-5 text-red-400" />
+        {isPage && <span>Delete</span>}
       </AlertDialogTrigger>
       <AlertDialogContent className="z-[9999]">
         <AlertDialogHeader>
