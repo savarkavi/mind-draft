@@ -16,6 +16,28 @@ export const getDocuments = query({
   },
 });
 
+export const getDocument = query({
+  args: { id: v.id("documents") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("User not authenticated");
+    }
+
+    const document = await ctx.db.get(args.id);
+
+    if (!document) {
+      throw new Error("Document not found");
+    }
+
+    return {
+      ...document,
+      documentUrl: await ctx.storage.getUrl(document.storageId),
+    };
+  },
+});
+
 export const createDocument = mutation({
   args: {
     title: v.string(),

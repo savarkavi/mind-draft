@@ -23,7 +23,15 @@ import SearchDialog from "./SearchDialog";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const SidebarItems = () => {
+const SidebarItems = ({
+  isTablet,
+  isCollapsed,
+  setIsCollapsed,
+}: {
+  isTablet: boolean;
+  isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const router = useRouter();
 
@@ -65,10 +73,18 @@ const SidebarItems = () => {
 
   const onNoteClick = (id: Id<"notes">) => {
     router.push(`/home/notes/${id}`);
+
+    if (isTablet) {
+      setIsCollapsed(true);
+    }
   };
 
   const onDocumentsClick = () => {
     router.push("/home/documents");
+
+    if (isTablet) {
+      setIsCollapsed(true);
+    }
   };
 
   return (

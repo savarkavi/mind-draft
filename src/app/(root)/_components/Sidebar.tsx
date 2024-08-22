@@ -7,9 +7,13 @@ import { useMediaQuery } from "usehooks-ts";
 const Sidebar = ({
   onChevronClick,
   isTablet,
+  isCollapsed,
+  setIsCollapsed,
 }: {
   onChevronClick: () => void;
   isTablet: boolean;
+  isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { user } = useUser();
 
@@ -34,7 +38,11 @@ const Sidebar = ({
           />
         </div>
       </div>
-      <SidebarItems />
+      <SidebarItems
+        isCollapsed={isCollapsed}
+        isTablet={isTablet}
+        setIsCollapsed={setIsCollapsed}
+      />
     </div>
   );
 };

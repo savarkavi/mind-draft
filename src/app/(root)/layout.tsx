@@ -13,6 +13,8 @@ import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import HomeHeader from "./home/_components/HomeHeader";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 
 const HomeLayout = ({
   children,
@@ -55,14 +57,24 @@ const HomeLayout = ({
               : "min-w-[288px] max-w-full"
           )}
         >
-          <Sidebar onChevronClick={onChevronClick} isTablet={isTablet} />
+          <Sidebar
+            onChevronClick={onChevronClick}
+            isTablet={isTablet}
+            isCollapsed={isCollapsed}
+            setIsCollapsed={setIsCollapased}
+          />
         </ResizablePanel>
         <ResizableHandle />
         <ResizablePanel defaultSize={85}>
           <div className="flex gap-12 p-4">
-            {isCollapsed && (
-              <Menu className="cursor-pointer" onClick={onMenuClick} />
-            )}
+            <div className="flex items-center gap-6">
+              <Link href="/home">
+                <Image src="/logo.png" alt="logo" width={42} height={42} />
+              </Link>
+              {isCollapsed && (
+                <Menu className="cursor-pointer" onClick={onMenuClick} />
+              )}
+            </div>
             {pathname.includes("/notes") && <HomeHeader />}
           </div>
           {children}

@@ -17,9 +17,16 @@ const DocumentsList = () => {
   }
 
   return (
-    <div className="mt-16 flex gap-8 flex-wrap">
-      {documents.map((document) => {
-        return <DocumentCard key={document._id} document={document} />;
+    <div className="mt-16 grid gap-8 justify-center md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+      {documents.map((document, i) => {
+        return (
+          <DocumentCard
+            key={document._id}
+            document={document}
+            idx={i}
+            length={documents.length}
+          />
+        );
       })}
     </div>
   );

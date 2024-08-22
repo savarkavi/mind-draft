@@ -10,7 +10,7 @@ const NotePage = () => {
   if (!user) return null;
 
   return (
-    <div className="max-w-[800px] mx-auto h-full">
+    <div className="max-w-[800px] mx-auto h-full px-8">
       <Toolbar />
     </div>
   );

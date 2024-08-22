@@ -22,8 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-[#F3EBDB]`}>
+        <NextTopLoader color="#4dc88a" />
         <Providers>
-          <NextTopLoader color="#4dc88a" />
           <Toaster position="top-center" />
           {children}
         </Providers>
