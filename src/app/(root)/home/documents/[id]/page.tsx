@@ -47,7 +47,7 @@ const DocumentPage = () => {
             )}
           </TabsContent>
           <TabsContent value="chat">
-            <ChatPanel />
+            <ChatPanel document={document} />
           </TabsContent>
         </Tabs>
       </div>

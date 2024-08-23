@@ -1,5 +1,10 @@
-import { mutation, query } from "./_generated/server";
+import { action, mutation, query } from "./_generated/server";
 import { v } from "convex/values";
+import { createChat } from "./chats";
+import { api } from "../convex/_generated/api";
+
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export const getDocuments = query({
   async handler(ctx) {
@@ -68,5 +73,67 @@ export const generateUploadUrl = mutation({
     }
 
     return await ctx.storage.generateUploadUrl();
+  },
+});
+
+export const askQuestion = action({
+  args: {
+    question: v.string(),
+    storageId: v.id("_storage"),
+    documentId: v.id("documents"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("User not authenticated");
+    }
+
+    const file = await ctx.storage.get(args.storageId);
+
+    if (!file) {
+      throw new Error("File not found");
+    }
+
+    const text = await file.text();
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const chat = model.startChat({
+      history: [
+        {
+          role: "user",
+          parts: [
+            {
+              text: `Here's a document for context. I'll ask questions about it later: ${text}`,
+            },
+          ],
+        },
+        {
+          role: "model",
+          parts: [
+            {
+              text: "I understand. I've reviewed the document you provided. What would you like to know about it?",
+            },
+          ],
+        },
+      ],
+    });
+
+    await ctx.runMutation(api.chats.createChat, {
+      documentId: args.documentId,
+      isHuman: true,
+      text: args.question,
+    });
+
+    const result = await chat.sendMessage(args.question);
+    const response = await result.response;
+
+    await ctx.runMutation(api.chats.createChat, {
+      documentId: args.documentId,
+      isHuman: false,
+      text: response.text(),
+    });
+
+    return response.text();
   },
 });

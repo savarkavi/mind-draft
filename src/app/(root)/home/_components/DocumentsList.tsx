@@ -16,6 +16,14 @@ const DocumentsList = () => {
     );
   }
 
+  if (documents.length === 0) {
+    return (
+      <div className="h-full flex justify-center items-center">
+        <h2 className="text-xl">No documents available.</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-16 grid gap-8 justify-center md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
       {documents.map((document, i) => {

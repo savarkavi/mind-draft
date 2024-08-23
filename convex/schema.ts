@@ -14,4 +14,10 @@ export default defineSchema({
     isArchived: v.boolean(),
     coverImage: v.optional(v.string()),
   }).index("by_user", ["userId"]),
+  chats: defineTable({
+    documentId: v.id("documents"),
+    userId: v.string(),
+    isHuman: v.boolean(),
+    text: v.string(),
+  }).index("by_documentId_user", ["documentId", "userId"]),
 });
