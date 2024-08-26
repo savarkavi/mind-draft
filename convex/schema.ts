@@ -4,6 +4,7 @@ import { v } from "convex/values";
 export default defineSchema({
   documents: defineTable({
     title: v.string(),
+    description: v.optional(v.string()),
     userId: v.string(),
     storageId: v.id("_storage"),
   }).index("by_user", ["userId"]),

@@ -65,7 +65,7 @@ const UploadModal = () => {
           <div className="flex flex-col gap-2">
             <UploadButton
               uploadUrl={generateUploadUrl}
-              fileTypes={[".txt", ".xml", ".doc", ".pdf"]}
+              fileTypes={[".txt", ".xml", ".doc", ".pdf", ".mdx"]}
               onUploadComplete={saveAfterUpload}
               onUploadError={(error: unknown) => {
                 alert(`ERROR! ${error}`);

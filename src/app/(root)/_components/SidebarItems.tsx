@@ -47,6 +47,7 @@ const SidebarItems = ({
   }, []);
 
   const notes = useQuery(api.notes.getNotes);
+  const documents = useQuery(api.documents.getDocuments);
   const createNote = useMutation(api.notes.createNote);
   const archiveNote = useMutation(api.notes.archiveNote);
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -89,7 +90,12 @@ const SidebarItems = ({
 
   return (
     <div className="h-full relative">
-      <SearchDialog open={searchOpen} setOpen={setSearchOpen} notes={notes} />
+      <SearchDialog
+        open={searchOpen}
+        setOpen={setSearchOpen}
+        notes={notes}
+        documents={documents}
+      />
       <div>
         <Item
           label="Search"

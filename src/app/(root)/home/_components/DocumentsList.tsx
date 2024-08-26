@@ -18,8 +18,8 @@ const DocumentsList = () => {
 
   if (documents.length === 0) {
     return (
-      <div className="h-full flex justify-center items-center">
-        <h2 className="text-xl">No documents available.</h2>
+      <div className="flex justify-center items-center">
+        <h2 className="text-xl mt-44">No documents available.</h2>
       </div>
     );
   }
