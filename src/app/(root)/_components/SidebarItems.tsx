@@ -132,12 +132,6 @@ const SidebarItems = ({
           </PopoverContent>
         </Popover>
       </div>
-      <Item
-        label="Settings"
-        icon={Settings}
-        onClick={() => {}}
-        className="absolute bottom-0 left-0 bg-[#EFE4CF] w-full hover:bg-[#EFE4CF]"
-      />
     </div>
   );
 };

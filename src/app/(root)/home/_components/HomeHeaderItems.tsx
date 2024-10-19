@@ -42,7 +42,7 @@ const HomeHeaderItems = () => {
 
     toast.promise(promise, {
       loading: "Deleting note...",
-      success: "Not deleted",
+      success: "Note deleted",
       error: "Failed to delete the note",
     });
 

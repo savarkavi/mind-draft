@@ -5,6 +5,7 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import { toast } from "sonner";
 import DeleteDialog from "@/components/DeleteDialog";
 import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
 const TrashContent = () => {
   const archivedNotes = useQuery(api.notes.getArchivedNotes);
@@ -57,7 +58,7 @@ const TrashContent = () => {
                     className="w-5 h-5 text-green-500 shrink-0"
                     onClick={() => onRestoreNote(note._id)}
                   />
-                  <DeleteDialog note={note} />
+                  {/* <DeleteDialog note={note} /> */}
                 </div>
               </div>
             );

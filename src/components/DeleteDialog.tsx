@@ -31,7 +31,7 @@ const DeleteDialog = ({
 
     toast.promise(promise, {
       loading: "Deleting note...",
-      success: "Not deleted",
+      success: "Note deleted",
       error: "Failed to delete the note",
     });
 
@@ -40,9 +40,14 @@ const DeleteDialog = ({
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="w-full flex items-center gap-2">
-        <Trash className="w-5 h-5 text-red-400" />
-        {isPage && <span>Delete</span>}
+      <AlertDialogTrigger asChild>
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="w-full flex items-center gap-2"
+        >
+          <Trash className="w-5 h-5 text-red-400" />
+          {isPage && <span>Delete</span>}
+        </div>
       </AlertDialogTrigger>
       <AlertDialogContent className="z-[9999]">
         <AlertDialogHeader>
